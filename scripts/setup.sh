@@ -4,10 +4,16 @@
 
 set -e
 
-echo "=== Context Bridge Setup ==="
+echo "=== Advanced Context Memory Setup ==="
 echo ""
 
-# Create directories
+# Check for original context-bridge and offer replacement
+if [ -f "$(dirname "$0")/install-check.js" ]; then
+    echo "Checking for existing context-bridge installation..."
+    node "$(dirname "$0")/install-check.js" || true
+    echo ""
+fi
+
 echo "Creating directories..."
 mkdir -p ~/.openclaw/model-agnostic-memory
 mkdir -p ~/.openclaw/agents/defaults
