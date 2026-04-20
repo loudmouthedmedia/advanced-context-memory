@@ -1,0 +1,194 @@
+{
+  "version": "1.1.0",
+  "description": "Cron naming taxonomy and validation rules",
+  "namespaces": {
+    "systems-engineer": {
+      "description": "System health, maintenance, and reliability checks",
+      "allowedPatterns": [
+        "systems-engineer",
+        "systems-engineer:{frequency}",
+        "systems-engineer-{frequency}",
+        "systems-engineer:{purpose}:{frequency}"
+      ],
+      "allowedFrequencies": ["daily", "twice-daily", "weekly", "hourly"],
+      "maxInstances": 5,
+      "preventDuplicates": true
+    },
+    "cache-agent": {
+      "description": "Data cache pulls and synchronization",
+      "allowedPatterns": [
+        "cache-agent:{time}-pull",
+        "cache-agent:{source}-sync"
+      ],
+      "allowedValues": {
+        "time": ["morning", "midday", "evening"],
+        "source": ["freshbooks", "ga4", "gsc", "brevo"]
+      },
+      "maxInstances": 6,
+      "preventDuplicates": false
+    },
+    "marketing-agent": {
+      "description": "Marketing automation and reporting",
+      "allowedPatterns": [
+        "marketing-agent:{task}",
+        "marketing-agent:{platform}-{action}",
+        "marketing-agent:{report}-report"
+      ],
+      "maxInstances": 15,
+      "preventDuplicates": true
+    },
+    "stats-agent": {
+      "description": "Stats and analytics reporting",
+      "allowedPatterns": [
+        "stats-agent:{frequency}-{type}",
+        "stats-agent:{task}"
+      ],
+      "maxInstances": 5,
+      "preventDuplicates": true
+    },
+    "watch": {
+      "description": "Monitoring and alerting jobs",
+      "allowedPatterns": [
+        "watch:{target}",
+        "watch:{target}-{subtarget}",
+        "watch:{target}-{subtarget}-{detail}"
+      ],
+      "maxInstances": 5,
+      "preventDuplicates": true
+    },
+    "daily": {
+      "description": "Daily maintenance and backups",
+      "allowedPatterns": [
+        "daily:{task}",
+        "daily:{system}-{action}",
+        "daily:{system}-{scope}-{action}",
+        "daily:{system}-{scope}-{subscope}-{action}"
+      ],
+      "maxInstances": 10,
+      "preventDuplicates": true
+    },
+    "weekly": {
+      "description": "Weekly reports and summaries",
+      "allowedPatterns": [
+        "weekly:{task}",
+        "weekly:{report-type}-report",
+        "weekly:{source}-{report}",
+        "weekly:{source}-{report}-{detail}"
+      ],
+      "maxInstances": 8,
+      "preventDuplicates": true
+    },
+    "reminder": {
+      "description": "User reminders and notifications",
+      "allowedPatterns": [
+        "reminder:{purpose}",
+        "reminder:{frequency}-{purpose}"
+      ],
+      "maxInstances": 10,
+      "preventDuplicates": false
+    },
+    "memory-check": {
+      "description": "Context memory usage monitoring",
+      "allowedPatterns": [
+        "memory-check"
+      ],
+      "maxInstances": 1,
+      "preventDuplicates": true
+    },
+    "meeting-prep": {
+      "description": "Meeting preparation and research",
+      "allowedPatterns": [
+        "meeting-prep",
+        "meeting-prep-{frequency}",
+        "meeting-prep:{type}"
+      ],
+      "maxInstances": 3,
+      "preventDuplicates": true
+    },
+    "reddit": {
+      "description": "Reddit observation and engagement",
+      "allowedPatterns": [
+        "reddit-morning-observer",
+        "morning-reddit-observer",
+        "reddit-{time}-{action}",
+        "reddit-{action}"
+      ],
+      "allowedValues": {
+        "time": ["morning", "daily"],
+        "action": ["observer", "check", "engage"]
+      },
+      "maxInstances": 5,
+      "preventDuplicates": true
+    },
+    "investor-outreach": {
+      "description": "Investor outreach automation",
+      "allowedPatterns": [
+        "investor-outreach",
+        "investor-outreach-{frequency}"
+      ],
+      "maxInstances": 2,
+      "preventDuplicates": true
+    },
+    "ga4": {
+      "description": "Google Analytics 4 reporting",
+      "allowedPatterns": [
+        "ga4",
+        "ga4-{report}-{period}",
+        "ga4-{action}"
+      ],
+      "maxInstances": 5,
+      "preventDuplicates": true
+    },
+    "gsc": {
+      "description": "Google Search Console reporting",
+      "allowedPatterns": [
+        "gsc-{report}-{period}",
+        "gsc-{action}"
+      ],
+      "maxInstances": 3,
+      "preventDuplicates": true
+    },
+    "marketing-followup": {
+      "description": "Marketing follow-up tasks",
+      "allowedPatterns": [
+        "marketing-followup",
+        "marketing-followup-{time}"
+      ],
+      "maxInstances": 3,
+      "preventDuplicates": true
+    },
+    "calendar-prep": {
+      "description": "Calendar preparation and review",
+      "allowedPatterns": [
+        "calendar-prep:{task}",
+        "calendar-prep:{frequency}-{task}"
+      ],
+      "maxInstances": 3,
+      "preventDuplicates": true
+    },
+    "proactive": {
+      "description": "Proactive check-ins and outreach",
+      "allowedPatterns": [
+        "proactive:{task}",
+        "proactive:{action}-{scope}"
+      ],
+      "maxInstances": 3,
+      "preventDuplicates": true
+    },
+    "morning-reddit": {
+      "description": "Morning Reddit observation (legacy name)",
+      "allowedPatterns": [
+        "morning-reddit-observer"
+      ],
+      "maxInstances": 1,
+      "preventDuplicates": true
+    }
+  },
+  "globalRules": {
+    "prohibitedNames": ["test", "temp", "copy"],
+    "requireDescription": false,
+    "maxTotalCrons": 60,
+    "suggestConsolidation": true,
+    "legacyMode": true
+  }
+}
