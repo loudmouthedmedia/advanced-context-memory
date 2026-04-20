@@ -23,10 +23,8 @@ You: [re-explain everything again]
 **After Context Bridge:**
 ```
 You: /new
-Model C: "📧 gog available, 📈 marketing-mode ready. 
-          Working on Jackpot Nuts. Previous model 
-          (MCP-120B) scheduled a meeting 30 min ago. 
-          Ready to continue."
+Model C: "📋 Continuity active. Previous model worked on X, Y is pending.
+          Context loaded. Ready to continue."
 ```
 
 ## What It Does
@@ -182,7 +180,7 @@ MIT - See LICENSE file
 
 ## Related Skills
 
-- [marketing-mode](https://clawhub.ai/thesethrose/marketing-mode) - Marketing strategy
+- [your-skill](https://clawhub.ai/your/skill) - Your skill description
 - [systems-engineer](https://openclaw.ai/skills/systems-engineer) - System health
 - [self-improving](https://openclaw.ai/skills/self-improving) - Learning & memory
 

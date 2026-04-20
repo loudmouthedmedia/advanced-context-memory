@@ -52,10 +52,8 @@ You: [re-explain everything again]
 **After Context Bridge:**
 ```
 You: /new
-Model C: "📧 gog available, 📈 marketing-mode ready. 
-          Working on Jackpot Nuts. Previous model 
-          (MCP-120B) scheduled a meeting 30 min ago. 
-          Ready to continue."
+Model C: "📋 Continuity active. Previous model worked on X, Y is pending.
+          Context loaded. Ready to continue."
 ```
 
 ---
