@@ -132,6 +132,24 @@ When adding skills/crons/agents:
 3. Update handoff (log the change)
 4. Git commit
 
+### Cron Creation and Maintenance Protocol
+When creating or modifying cron jobs, include these actions every time:
+1. Check for an existing canonical job before adding a new one. Do not create a second active job that performs the same function on a similar schedule.
+2. Prefer script-first cron design. The cron should call one stable script or narrowly-scoped workflow, not rely on open-ended agent improvisation when a script can do the job.
+3. Set explicit delivery rules for any job that announces externally. Do not rely on ambiguous default channels when multiple channels are configured.
+4. Immediately update `~/.openclaw/cron-registry.json` after cron creation, disablement, replacement, or major behavior change.
+5. Mark replacements clearly in the registry and in memory so future sessions can see which job is canonical and which jobs were retired.
+6. During cleanup passes, disable duplicate legacy jobs and prune stale one-off jobs that are no longer operationally useful.
+7. Preserve meaningful audit history in memory, but keep the active cron surface small, canonical, and easy to inspect.
+
+### Required Cron Hygiene Actions
+For any cron maintenance pass, include this checklist:
+- identify duplicate active jobs
+- identify stale disabled one-off jobs
+- keep one canonical active job per responsibility
+- update `~/.openclaw/cron-registry.json`
+- log the cleanup in workspace memory
+
 ---
 
 ## Why "Context Bridge"?
