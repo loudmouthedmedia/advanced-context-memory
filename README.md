@@ -139,6 +139,19 @@ When adding skills/crons/agents:
 3. Update handoff (log the change)
 4. Git commit
 
+## Recent Improvements
+
+### Cron hygiene protocol
+The skill now includes an explicit cron hygiene protocol so future cron work follows a repeatable pattern:
+- check for an existing canonical cron before creating a new one
+- prefer script-first cron design when possible
+- set explicit delivery rules for announced jobs
+- update the cron registry after cron creation, disablement, replacement, or major behavior changes
+- log cron cleanup work into memory
+
+### Nightly Infinity sync hardening
+The related Production Files workflow was improved so nightly sync no longer silently misses newly created project notes. The sync now surfaces unmapped `notes/projects/*.md` files as review candidates instead of pretending everything is already covered.
+
 ## Session Startup Protocol
 
 **Required by AGENTS.md:**
