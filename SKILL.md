@@ -150,6 +150,48 @@ For any cron maintenance pass, include this checklist:
 - update `~/.openclaw/cron-registry.json`
 - log the cleanup in workspace memory
 
+### Operational reliability playbooks
+When a recurring operational failure appears, use the reliability playbooks before changing code or config blindly.
+
+Read `references/reliability-overview.md` first when the problem looks like recurring infrastructure drift, delivery failure, auth decay, or cron/reporting breakage.
+
+Then read only the matching focused playbook:
+- `references/signal-timeouts.md` for Signal deadline or RPC timeout failures
+- `references/cron-delivery-vs-job-failure.md` when a cron appears broken but may only have failed on announce/send
+- `references/runtime-drift.md` when workspace fixes and live runtime behavior disagree
+- `references/auth-decay-invalid-grant.md` for OAuth refresh failures like `invalid_grant`
+
+For quick deterministic triage, run:
+`node ~/.openclaw/workspace/skills/context-bridge/scripts/classify-operational-failure.mjs "<error text>"`
+
+For a compact runtime/config drift snapshot, run:
+`node ~/.openclaw/workspace/skills/context-bridge/scripts/health-snapshot.mjs`
+
+Use this layer to:
+1. classify the failure correctly,
+2. prefer reversible mitigations first,
+3. distinguish source patches from live-runtime rollout,
+4. preserve the diagnosis in memory so future sessions do not rediscover it from scratch.
+
+### Sensitive Data Guardrail Propagation
+Context Bridge must carry sensitive-data handling rules across sessions, model switches, and handoffs so this behavior does not depend on one model remembering a user preference.
+
+Sensitive categories include:
+- financial data
+- passwords / tokens / API keys / secrets
+- personal PII
+- confidential business records
+
+When a request falls into one of those categories, the continuity rule should be:
+1. classify the request as sensitive,
+2. prefer or require a local-only model path when configured,
+3. do not silently fall back to cloud models,
+4. require explicit approval before any cloud handling if policy allows exceptions,
+5. log the actual model/runtime used for the sensitive step,
+6. preserve this guardrail across context reloads and model changes.
+
+This rule should be treated as an execution guardrail, not just a prompt reminder.
+
 ---
 
 ## Why "Context Bridge"?
